@@ -43,7 +43,7 @@ const Account: React.FC = () => {
                 <div className="border p-4 h-48 rounded-xl mb-4">
                   <div className="flex justify-between">
                     <p>Address</p>
-                    <FontAwesomeIcon icon={faPencilAlt} color="#A46E05" />
+                    {/* <FontAwesomeIcon icon={faPencilAlt} color="#A46E05" /> */}
                   </div>
                   <hr className="bg-gray-400 w-full mt-4 " />
                   <h1 className="mt-3">Your default shipping Address</h1>
@@ -60,7 +60,7 @@ const Account: React.FC = () => {
                   <hr className="bg-gray-400 w-full mt-4 " />
                   <h1 className="mt-3">Available Store Details</h1>
                   <div className="flex mt-1">
-                    <FontAwesomeIcon icon={faWallet} className="text-4xl mr-2 fa-sm" color="#A46E05" />
+                    {/* <FontAwesomeIcon icon={faWallet} className="text-4xl mr-2 fa-sm" color="#A46E05" /> */}
                     <h1 className="mt-3">₦0.00</h1>
                   </div>
                 </div>
@@ -69,24 +69,24 @@ const Account: React.FC = () => {
                 <div className="border p-4 h-48 rounded-xl mb-4">
                   <div className="flex justify-between">
                     <p>Newsletter Preference</p>
-                    <FontAwesomeIcon icon={faPencilAlt} color="#A46E05" />
+                    {/* <FontAwesomeIcon icon={faPencilAlt} color="#A46E05" /> */}
                   </div>
                   <hr className="bg-gray-400 w-full mt-4 " />
                   <h1 className="mt-3">You are currently subscribed</h1>
                   <div className="flex mt-1">
-                    <FontAwesomeIcon
+                    {/* <FontAwesomeIcon
                       icon={faCheck}
                       className="text-gray-500 mr-3"
-                    />
+                    /> */}
                     <p className="font-light text-gray-400 text-sm mt ">
                       New Offers
                     </p>
                   </div>
                   <div className="flex mt-1">
-                    <FontAwesomeIcon
+                    {/* <FontAwesomeIcon
                       icon={faCheck}
                       className="text-gray-500 mr-3"
-                    />
+                    /> */}
                     <p className="font-light text-gray-400 text-sm mt ">
                       Daily Newsletter
                     </p>
