@@ -158,7 +158,7 @@ export default function Nav() {
               )}
             </DropdownItem>
 
-            <DropdownItem variant="flat" className={`${!user&& "no-space"} mt-1`} key="sign up">
+            <DropdownItem variant="flat" className={`${!user&& "no-space"} mt-1 p-0`} key="sign up">
               {!user && (
                 <Link href={"/auth/signup"}>
                   <Button className="w-full bg-[#A46E05BD] text-white py-2 rounded-md">
