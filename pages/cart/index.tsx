@@ -154,7 +154,7 @@ const DeliveryFee = 1000;
         <div
           className={`min-h-[55vh] w-full h-full flex flex-col gap-3 bg-white p-4`}
         >
-          <h1 className="border-b border-b-black text-3xl font-semibold">
+          <h1 className="border-b border-b-black text-3xl py-2 font-semibold">
             Cart({cartItems.length})
           </h1>
           {cartItems.length > 0 ? (
