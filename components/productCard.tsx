@@ -44,7 +44,7 @@ export default function ProductCard({
     <Card
       shadow="md"
       key={index}
-      className="shadow-sm rounded-md w-full sm:w-[230px] p-0 bg-white mx-auto sm:max-w-[220px]"
+      className="shadow-sm rounded-md w-full p-0 bg-white mx-auto sm:max-w-[250px]"
       style={{
         padding: "0px",
       }}
