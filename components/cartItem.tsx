@@ -64,12 +64,11 @@ export default function Cartitem({
 
           <div className="flex gap-1">
             <span className="text-stone-600">seller:</span>
-            <p className="font-semibold">{seller}</p>
           </div>
           <span className="text-stone-600">In stock</span>
         </div>
         <div className="flex flex-col gap-3">
-          <p className="text-center">₦{price.toLocaleString()}</p>
+          <p className="text-center">₦{originalPrice.toLocaleString()}</p>
 
           <div className="flex justify-between px-1 gap-1 text-white items-center">
             <Button
