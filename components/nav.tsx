@@ -71,11 +71,11 @@ export default function Nav() {
   return (
     <Navbar
       maxWidth="xl"
-      className="justify-around shadow px-3 bg-white p-0 sm:px-6 top-[0]"
+      className="justify-around shadow px-3 bg-white p-0 md:px-6 top-[0]"
     >
       {router.pathname.includes("/seller") && (
         <NavbarMenuToggle
-          className="flex sm:hidden"
+          className="flex md:hidden"
           onClick={() => {
             setIsNavOpen(!isNavOpen);
           }}
@@ -90,7 +90,7 @@ export default function Nav() {
         <Image src={logo} alt="logo" width={35} height={45} />
         <p className="flex text-3xl font-bold text-[#A46E05] ">KASUWA</p>
       </NavbarBrand>
-      <NavbarContent className="sm:flex-grow-[1] flex-grow-[1.2] ">
+      <NavbarContent className="md:flex-grow-[1] flex-grow-[1.2] ">
         <NavbarItem
           className="bg-white rounded-md md:m-0 ml-auto border md:w-full w-[50px] cursor-pointer"
           onClick={onOpen}
@@ -98,7 +98,7 @@ export default function Nav() {
           <Input
             startContent={<SearchIcon />}
             className="text-black  w-full m-auto border border-[#A46E05] rounded-[7px] bg-white cursor-pointer"
-            radius="sm"
+            radius="md"
             style={{
               paddingTop: "7px",
               paddingBottom: "7px",
@@ -110,14 +110,14 @@ export default function Nav() {
             placeholder="Search"
           />
         </NavbarItem>
-        <Button className="bg-[#A46E05BD] rounded-md px-3 py-[6px] text-white hidden sm:flex">
+        <Button className="bg-[#A46E05BD] rounded-md px-3 py-[6px] text-white hidden md:flex">
           Search
         </Button>
       </NavbarContent>
       <NavbarContent
         as="div"
         justify="end"
-        className="trigger sm:flex-grow-[0.4] flex-grow-[0.3]"
+        className="trigger md:flex-grow-[0.4] flex-grow-[0.3]"
       >
         <Dropdown
           className=""
@@ -133,7 +133,7 @@ export default function Nav() {
                 height={25}
                 alt="account"
               />
-              <span className="hidden sm:flex">Account</span>
+              <span className="hidden md:flex">Account</span>
               <Image
                 className="transition-transform mt-1"
                 src={drop}
@@ -209,7 +209,7 @@ export default function Nav() {
             </DropdownItem>
             <DropdownItem
               variant="flat"
-              className="myDropItem flex sm:hidden   py-1"
+              className="myDropItem flex md:hidden   py-1"
             >
               <div className="flex gap-2 justify-start items-center">
                 {cartItems?.length > 0 ? (
@@ -252,7 +252,7 @@ export default function Nav() {
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
-      <NavbarItem className="hidden sm:flex">
+      <NavbarItem className="hidden md:flex">
         <div className="flex gap-[6px] justify-start items-center">
           {cartItems.length > 0 ? (
             <Badge
@@ -283,7 +283,7 @@ export default function Nav() {
         onOpenChange={onOpenChange}
         placement="top"
         backdrop="blur"
-        className="h-screen max-h-[unset] w-[95%] sm:max-h-[60vh] "
+        className="h-screen max-h-[unset] w-[95%] md:max-h-[60vh] "
         size={"3xl"}
         scrollBehavior="inside"
       >
