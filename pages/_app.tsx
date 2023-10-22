@@ -4,11 +4,11 @@ import { NextUIProvider } from "@nextui-org/react";
 import type { AppProps } from "next/app";
 import Nav from "@/components/nav";
 import "../app/globals.css";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Footer from "@/components/footer";
 import { AppContext } from "@/utils/AppContext";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Notification from "@/components/notification";
 interface cartItem {
   img: string;
@@ -36,10 +36,7 @@ function App({ Component, pageProps }: AppProps) {
   const [notificationVisibles, setNotificationVisible] = useState(false);
   const [savedItems, setSavedItems] = useState<any>([]);
   const [list, setList] = useState([]);
-  const router=useRouter()
   const API_URL = "https://kasuwa-b671.onrender.com";
-  const userDetails = typeof window !== "undefined" ? window.localStorage.getItem("user") : null;
-  const user = userDetails ? JSON.parse(userDetails) : null;
 
   const FetchProducts = async () => {
     try {
@@ -53,11 +50,6 @@ function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     FetchProducts();
   }, []);
-  useEffect(()=>{
-    if(!user && router.pathname.includes("/account")){
-      router.push("/auth/signIn")
-    }
-  })
   const showNotification = (message: any) => {
     setNotification(message);
     setNotificationVisible(true);
@@ -66,7 +58,6 @@ function App({ Component, pageProps }: AppProps) {
       setNotificationVisible(false);
     }, 3000); // Hide the notification after 3 seconds (adjust the duration as needed)
   };
-
  useEffect(() => {
     // Save cart items to local storage whenever they change
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -83,7 +74,8 @@ function App({ Component, pageProps }: AppProps) {
     if (savedItems) {
       setSavedItems(JSON.parse(savedItems));
     }
-  }, [cartItems, savedItems]);
+  }, []);
+
  
   const addToCart = (product: any, count: number) => {
     const itemWithCount = { ...product, quantity: count };
@@ -129,6 +121,7 @@ function App({ Component, pageProps }: AppProps) {
     );
     setCartItems(updatedCartItems);
   };
+  const router = useRouter();
   return (
     <NextUIProvider>
       <AppContext.Provider
