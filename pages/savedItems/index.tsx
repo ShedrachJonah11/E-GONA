@@ -19,18 +19,22 @@ export default function SavedItems() {
                 originalPrice: string;
                 saleScale: string;
                 name: string;
+                _id:string;
+                stock:string
               },
               index: number
             ) => (
               <ProductCard
+              
                 item={items}
                 key={index}
                 src={items.images[0].url}
                 index={index}
                 originalPrice={items.originalPrice}
                 title={items.name}
-                count={count}
-              />
+                count={count} 
+                _id={items._id}
+                 stock={items.stock}              />
             )
           )}
       </div>
