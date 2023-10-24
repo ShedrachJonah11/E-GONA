@@ -21,14 +21,13 @@ import SkeletonLoading from "@/components/skeletonLoading";
 
 import { usePaystackPayment } from "react-paystack";
 
-
 export default function Cart() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
   const { cartItems, list, count } = useContext(AppContext);
   const userDetails =
     typeof window !== "undefined" ? window.localStorage.getItem("user") : false;
-const DeliveryFee = 1000;
+  const DeliveryFee = 1000;
   const user = JSON.parse(userDetails as string);
   const total = cartItems.reduce(
     (item: any, current: any) =>
@@ -42,8 +41,6 @@ const DeliveryFee = 1000;
       onOpen();
     }
   };
-
-  
 
   const publicKey = "pk_test_861fff4e3acc786df9a3e54d2889fc2633e0f888"; // Paystack test public key
   const amount = (total + DeliveryFee) * 100;
@@ -67,7 +64,6 @@ const DeliveryFee = 1000;
     // Trigger the Paystack payment process
     initializePayment();
   };
-
 
   return (
     <div className="pt-6 ">
@@ -160,15 +156,18 @@ const DeliveryFee = 1000;
           {cartItems.length > 0 ? (
             cartItems.map((items: any, index: number) => (
               <Cartitem
+              stock={items.stock}
+                _id={items._id}
                 img={items.images[0].url}
                 index={index}
                 originalPrice={items.originalPrice}
                 title={items.name}
                 key={index}
-                quantity={items.quantity}          />
+                quantity={items.quantity}
+              />
             ))
           ) : (
-            <div className="h-[50vh] gap-2 flex justify-center items-center w-full">
+            <div className="h-[50vh] gap-2 flex justify-center items-center w-full ">
               <p>you have no items in your cart</p>
               <Image src="cart.svg" alt="logo" width={20} height={20} />
             </div>
@@ -193,7 +192,7 @@ const DeliveryFee = 1000;
                 className="text-white text-sm bg-[#A46E05BD] rounded-md py-2 px-4"
               >
                 Checkout (₦{parseFloat(total.toFixed(2)).toLocaleString()})
- </Button>
+              </Button>
             )}
           </div>
         </div>
@@ -204,27 +203,35 @@ const DeliveryFee = 1000;
           Most Searched Product
         </span>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))]  w-full gap-x-[1.50rem] gap-y-4 pt-10 max-w-[1280px] px-6 py-10 mx-auto ">
-          {list && list.length > 0 ? list.slice(1, 6).map(
-            (
-              items: {
-                images: any;
-                originalPrice: string;
-                saleScale: string;
-                name: string;
-              },
-              index: number
-            ) => (
-              <ProductCard
-                item={items}
-                key={index}
-                src={items.images[0].url}
-                index={index}
-                originalPrice={items.originalPrice}
-                title={items.name}
-                count={count}
-              />
+          {list && list.length > 0 ? (
+            list.slice(1, 6).map(
+              (
+                items: {
+                  images: any;
+                  originalPrice: string;
+                  saleScale: string;
+                  name: string;
+                  _id: string;
+                  stock:string
+                },
+                index: number
+              ) => (
+                <ProductCard
+                stock={items.stock}
+                  _id={items._id}
+                  item={items}
+                  key={index}
+                  src={items.images[0].url}
+                  index={index}
+                  originalPrice={items.originalPrice}
+                  title={items.name}
+                  count={count}
+                />
+              )
             )
-          ):<SkeletonLoading/>}
+          ) : (
+            <SkeletonLoading />
+          )}
         </div>
       </div>
     </div>

@@ -80,7 +80,7 @@ function App({ Component, pageProps }: AppProps) {
   const addToCart = (product: any, count: number) => {
     const itemWithCount = { ...product, quantity: count };
     setCartItems([...cartItems, itemWithCount]);
-    showNotification(product.title);
+    showNotification(product.name);
     setNotificationAction("added to cart");
   };
   const addToSavedItems = (product: any) => {

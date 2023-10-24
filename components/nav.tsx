@@ -148,7 +148,7 @@ export default function Nav() {
             variant="flat"
             className="bg-white rounded-md p-3 flex flex-col gap-[2px]"
           >
-            <DropdownItem variant="flat" className={`${!user&& "no-space"} p-0`} key="sign in">
+            <DropdownItem variant="flat" className={`${user&& "nav-no-space"} p-0`} key="sign in">
               {!user && (
                 <Link href={"/auth/signIn"}>
                   <Button className="w-full text-white bg-[#A46E05BD] py-2 rounded-md">
@@ -158,7 +158,7 @@ export default function Nav() {
               )}
             </DropdownItem>
 
-            <DropdownItem variant="flat" className={`${!user&& "no-space"} mt-1 p-0`} key="sign up">
+            <DropdownItem variant="flat" className={`${user&& "nav-no-space"} my-1 p-0`} key="sign up">
               {!user && (
                 <Link href={"/auth/signup"}>
                   <Button className="w-full bg-[#A46E05BD] text-white py-2 rounded-md">
@@ -168,7 +168,7 @@ export default function Nav() {
               )}
             </DropdownItem>
 
-            <DropdownItem variant="flat" className={`${!user&& "no-space"} py-2 mt-1`}  key="account">
+            <DropdownItem variant="flat" className={`${!user&& "no-space"} py-2 `}  key="account">
               {user&&(
               <div className="flex gap-1 justify-start items-center">
                 <Image src={account} alt="logo" width={20} height={20} />
@@ -311,10 +311,12 @@ export default function Nav() {
                         originalPrice: string;
                         saleScale: string;
                         name: string;
+                        _id:string
                       },
                       index: number
                     ) => (
                       <ProductCard
+                       _id={items._id}
                         item={items}
                         key={index}
                         src={items.images[0].url}

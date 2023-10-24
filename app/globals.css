@@ -107,6 +107,9 @@ padding: 0;
 .no-space{
   padding: 0;
 }
+.nav-no-space{
+ display: none;
+}
 @media (max-width:300px) {
   .goods{
     flex-direction: column;

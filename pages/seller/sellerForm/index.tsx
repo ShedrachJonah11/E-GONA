@@ -8,11 +8,12 @@ import {
   cn,
   Navbar,
 } from "@nextui-org/react";
-import { useState, useReducer } from "react";
+import { useState, useReducer,useEffect } from "react";
 import CheckIcon from "@/components/checkIcon";
 import { MailIcon } from "@/components/mailIcon";
 import { useRouter } from "next/router";
 import "../../../app/form style.css";
+import axios from "axios";
 
 const API_URL = "https://kasuwa-b671.onrender.com";
 
@@ -194,6 +195,7 @@ export default function SellerForm() {
       console.log(error);
     }
   };
+
   return (
     <div>
       <nav className="py-2 px-2 bg-white shadow-sm top-[0] sticky z-20">
@@ -224,7 +226,7 @@ export default function SellerForm() {
             >
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
-                  Shop Name *
+                  Shop Name 
                 </span>
                 <MyInput
                   value={form.shopName}
@@ -254,7 +256,7 @@ export default function SellerForm() {
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold  max-w-[300px] pr-1">
                   Please select if you're an Individual or Business
-                  Entity/Company *
+                  Entity/Company 
                 </span>
                 <Select
                   style={{
@@ -328,7 +330,7 @@ export default function SellerForm() {
               </div>
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
-                  Account Manager First and Last Name *
+                  Account Manager First and Last Name 
                 </span>
                 <MyInput
                   value={form.accountManagerName}
@@ -347,7 +349,7 @@ export default function SellerForm() {
               </div>
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
-                  Account manager phone number *
+                  Account manager phone number 
                 </span>
                 <MyInput
                   value={form.accountManagerPhoneNumber}
@@ -371,7 +373,7 @@ export default function SellerForm() {
               </div>
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
-                  Additional phone number *
+                  Additional phone number 
                 </span>
                 <MyInput
                   value={form.phoneNumber}
@@ -394,7 +396,7 @@ export default function SellerForm() {
               </div>
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold max-w-[300px] pr-1">
-                  Email Address *
+                  Email Address 
                 </span>
                 <MyInput
                   startContent={<MailIcon />}
@@ -416,7 +418,7 @@ export default function SellerForm() {
               </div>
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
-                  Re-type Email Address *
+                  Re-type Email Address 
                 </span>
                 <MyInput
                   startContent={<MailIcon />}
@@ -442,12 +444,12 @@ export default function SellerForm() {
               {emailError && <div className="text-red-500">{emailError}</div>}
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
-                  Password *
+                  Password 
                 </span>
                 <MyInput
                   isRequired
                   type="password"
-                  placeholder="******"
+                  placeholder=""
                   radius="md"
                   style={{
                     backgroundColor: "white",
@@ -464,12 +466,12 @@ export default function SellerForm() {
               </div>
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
-                  Re-type Password *
+                  Re-type Password 
                 </span>
                 <MyInput
                   isRequired
                   type="password"
-                  placeholder="******"
+                  placeholder=""
                   radius="md"
                   style={{
                     backgroundColor: "white",
@@ -484,7 +486,7 @@ export default function SellerForm() {
                   }}
                 />
               </div>
-              {/* Password Error Message */}
+              
               {passwordError && <div className="text-red-500">{passwordError}</div>}
               <div className="w-full mx-auto max-w-[600px] py-5">
                 <Checkbox
