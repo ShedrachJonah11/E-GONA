@@ -312,6 +312,7 @@ export default function Nav() {
                         saleScale: string;
                         name: string;
                         _id:string
+                        stock:string;
                       },
                       index: number
                     ) => (
