@@ -325,6 +325,7 @@ export default function Nav() {
                         originalPrice={items.originalPrice}
                         title={items.name}
                         count={count}
+                        stock={items.stock}
                       />
                     )
                   )}
