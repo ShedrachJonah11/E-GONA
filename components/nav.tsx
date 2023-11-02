@@ -114,6 +114,7 @@ export default function Nav() {
           Search
         </Button>
       </NavbarContent>
+
       <NavbarContent
         as="div"
         justify="end"
@@ -148,7 +149,11 @@ export default function Nav() {
             variant="flat"
             className="bg-white rounded-md p-3 flex flex-col gap-[2px]"
           >
-            <DropdownItem variant="flat" className={`${user&& "nav-no-space"} p-0`} key="sign in">
+            <DropdownItem
+              variant="flat"
+              className={`${user && "nav-no-space"} p-0`}
+              key="sign in"
+            >
               {!user && (
                 <Link href={"/auth/signIn"}>
                   <Button className="w-full text-white bg-[#A46E05BD] py-2 rounded-md">
@@ -158,7 +163,11 @@ export default function Nav() {
               )}
             </DropdownItem>
 
-            <DropdownItem variant="flat" className={`${user&& "nav-no-space"} my-1 p-0`} key="sign up">
+            <DropdownItem
+              variant="flat"
+              className={`${user && "nav-no-space"} my-1 p-0`}
+              key="sign up"
+            >
               {!user && (
                 <Link href={"/auth/signup"}>
                   <Button className="w-full bg-[#A46E05BD] text-white py-2 rounded-md">
@@ -168,24 +177,32 @@ export default function Nav() {
               )}
             </DropdownItem>
 
-            <DropdownItem variant="flat" className={`${!user&& "no-space"} py-2 `}  key="account">
-              {user&&(
-              <div className="flex gap-1 justify-start items-center">
-                <Image src={account} alt="logo" width={20} height={20} />
-                <span>
-                  <Link href="/account">My Account</Link>
-                </span>{" "}
-              </div>
+            <DropdownItem
+              variant="flat"
+              className={`${!user && "no-space"} py-2 `}
+              key="account"
+            >
+              {user && (
+                <div className="flex gap-1 justify-start items-center">
+                  <Image src={account} alt="logo" width={20} height={20} />
+                  <span>
+                    <Link href="/account">My Account</Link>
+                  </span>{" "}
+                </div>
               )}
             </DropdownItem>
-            <DropdownItem variant="flat" className={`${!user&& "no-space"} py-2`}  key="settings">
-            {user&&(
-              <div className="flex gap-1 justify-start items-center">
-                <Image src={Orders} alt="logo" width={20} height={20} />
-                <span>
-                  <Link href={"#"}>My Orders</Link>
-                </span>
-              </div>
+            <DropdownItem
+              variant="flat"
+              className={`${!user && "no-space"} py-2`}
+              key="settings"
+            >
+              {user && (
+                <div className="flex gap-1 justify-start items-center">
+                  <Image src={Orders} alt="logo" width={20} height={20} />
+                  <span>
+                    <Link href={"#"}>My Orders</Link>
+                  </span>
+                </div>
               )}
             </DropdownItem>
             <DropdownItem variant="flat" className=" py-2" key="saved items">
@@ -236,7 +253,7 @@ export default function Nav() {
                 router.push("/");
               }}
               variant="flat"
-              className={`${!user&& "no-space"} py-2`}
+              className={`${!user && "no-space"} py-2`}
               key="logout"
               color="danger"
             >
@@ -277,6 +294,19 @@ export default function Nav() {
           </span>
         </div>
       </NavbarItem>
+      <NavbarItem className="hidden md:flex">
+        {user && user.role === "seller" ? (
+          <Image src={Account} alt="" />
+        ) : (
+          <div className="flex gap-[6px] justify-start items-center">
+            <Link href="/seller/sellerForm">
+              <Button className="bg-[green] rounded-md px-3 py-[6px] text-white hidden md:flex">
+                Become a seller
+              </Button>
+            </Link>
+          </div>
+        )}
+      </NavbarItem>
 
       <Modal
         isOpen={isOpen}
@@ -303,7 +333,6 @@ export default function Nav() {
               </ModalHeader>
               <ModalBody>
                 <div className=" grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))]  w-full gap-x-[1.50rem] gap-y-4 pt-10 max-w-[1280px] px-6 py-10 mx-auto ">
-
                   {filteredList.map(
                     (
                       items: {
@@ -311,13 +340,13 @@ export default function Nav() {
                         originalPrice: string;
                         saleScale: string;
                         name: string;
-                        _id:string
-                        stock:string;
+                        _id: string;
+                        stock: string;
                       },
                       index: number
                     ) => (
                       <ProductCard
-                       _id={items._id}
+                        _id={items._id}
                         item={items}
                         key={index}
                         src={items.images[0].url}
