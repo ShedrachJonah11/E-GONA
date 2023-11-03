@@ -181,7 +181,7 @@ export default function Nav() {
               )}
             </DropdownItem>
             <DropdownItem
-              className={`p-0 flex lg:hidden`}
+              className={`${farmer && "nav-no-space"} p-0 flex lg:hidden`}
             >
               <div>
                 { !farmer ? (
@@ -206,7 +206,7 @@ export default function Nav() {
               </div>
             </DropdownItem>
             <DropdownItem
-              className={`p-0 flex `}
+              className={`${farmer && "nav-no-space"} p-0 flex `}
             >
               <div>
                 { !farmer && (
