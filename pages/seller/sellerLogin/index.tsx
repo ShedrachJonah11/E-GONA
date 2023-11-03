@@ -91,8 +91,8 @@ export default function SellerLogin() {
         const signupRes = await signup.json();
         console.log(signupRes);
         if (signupRes.success) {
-          router.push("/seller/dashboard");
           localStorage.setItem("farmer", JSON.stringify(signupRes.data))
+          router.push("/seller/dashboard");
         }
       } 
     } catch (error) {
