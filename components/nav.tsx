@@ -19,6 +19,7 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
+  Link,
 } from "@nextui-org/react";
 import Image from "next/image";
 import logo from "../public/logo.svg";
@@ -26,7 +27,6 @@ import categories from "../public/categories.svg";
 import cart from "../public/cart.svg";
 import account from "../public/account.svg";
 import setting from "../public/setting-2.svg";
-import Link from "next/link";
 import SearchIcon from "./searchIcon";
 import Account from "../public/acount-2.svg";
 import drop from "../public/drop.svg";
@@ -48,7 +48,11 @@ export default function Nav() {
     typeof window !== "undefined" ? window.localStorage.getItem("user") : false;
   const user = JSON.parse(userDetails as string);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+  const farerDetails =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("farmer")
+      : false;
+  const farmer = JSON.parse(farerDetails as string);
   const filteredList = list.filter((item: any) => {
     return item.name.toLowerCase().includes(searchQuery.toLowerCase());
   });
@@ -155,7 +159,7 @@ export default function Nav() {
               key="sign in"
             >
               {!user && (
-                <Link href={"/auth/signIn"}>
+                <Link className="text-black w-full" href={"/auth/signIn"}>
                   <Button className="w-full text-white bg-[#A46E05BD] py-2 rounded-md">
                     Sign In
                   </Button>
@@ -165,11 +169,11 @@ export default function Nav() {
 
             <DropdownItem
               variant="flat"
-              className={`${user && "nav-no-space"} my-1 p-0`}
+              className={`${user && "nav-no-space"} my-1 p-0 w-full`}
               key="sign up"
             >
               {!user && (
-                <Link href={"/auth/signup"}>
+                <Link className="text-black w-full" href={"/auth/signup"}>
                   <Button className="w-full bg-[#A46E05BD] text-white py-2 rounded-md">
                     Sign Up
                   </Button>
@@ -179,33 +183,33 @@ export default function Nav() {
 
             <DropdownItem
               variant="flat"
-              className={`${!user && "no-space"} py-2 `}
+              className={`${!user && "no-space"} py-2 w-full`}
               key="account"
             >
               {user && (
                 <div className="flex gap-1 justify-start items-center">
                   <Image src={account} alt="logo" width={20} height={20} />
                   <span>
-                    <Link href="/account">My Account</Link>
+                    <Link className="text-black" href="/account">My Account</Link>
                   </span>{" "}
                 </div>
               )}
             </DropdownItem>
             <DropdownItem
               variant="flat"
-              className={`${!user && "no-space"} py-2`}
+              className={`${!user && "no-space"} py-2 w-full`}
               key="settings"
             >
               {user && (
                 <div className="flex gap-1 justify-start items-center">
                   <Image src={Orders} alt="logo" width={20} height={20} />
                   <span>
-                    <Link href={"#"}>My Orders</Link>
+                    <Link className="text-black" href={"#"}>My Orders</Link>
                   </span>
                 </div>
               )}
             </DropdownItem>
-            <DropdownItem variant="flat" className=" py-2" key="saved items">
+            <DropdownItem variant="flat" className=" py-2 w-full" key="saved items">
               <div className="flex gap-2 justify-start items-center">
                 {savedItems?.length > 0 ? (
                   <Badge
@@ -220,7 +224,7 @@ export default function Nav() {
                 )}
                 <span>
                   {" "}
-                  <Link href={"/savedItems"}>Saved Items</Link>
+                  <Link className="text-black" href={"/savedItems"}>Saved Items</Link>
                 </span>
               </div>
             </DropdownItem>
@@ -242,11 +246,30 @@ export default function Nav() {
                 )}
 
                 <span>
-                  <Link href={"/cart"}>Cart</Link>
+                  <Link className="text-black" href={"/cart"}>Cart</Link>
                 </span>
               </div>
             </DropdownItem>
-
+            <DropdownItem className={`${!farmer && "nav-no-space"} p-0 flex md:hidden`}>
+            <div>
+            {farmer && !farmer?  (
+          <div className="flex gap-[6px] justify-start items-center">
+                
+          <Button as={Link} href="/seller/sellerForm" className="bg-[green] rounded-md  py-[6px] text-white px-3 w-full">
+            Become a seller
+          </Button>
+      </div>
+        ) : (
+          <div className="flex gap-[6px] justify-start items-center">
+            <Link className="text-black" href="/seller/dashboard">
+              <Button className="bg-[green] rounded-md px-3 py-[6px] text-white hidden md:flex">
+                farmer dashboard
+              </Button>
+            </Link>
+          </div>
+        )}
+            </div>
+            </DropdownItem>
             <DropdownItem
               onClick={() => {
                 localStorage.removeItem("user");
@@ -261,7 +284,7 @@ export default function Nav() {
                 <div className="flex gap-1 justify-start items-center">
                   <Image src={logout} alt="logo" width={21} height={20} />
                   <span>
-                    <Link href="/account">Logout</Link>
+                    <Link className="text-black" href="/account">Logout</Link>
                   </span>{" "}
                 </div>
               )}
@@ -290,18 +313,23 @@ export default function Nav() {
             />
           )}
           <span>
-            <Link href={"/cart"}>Cart</Link>
+            <Link className="text-black" href={"/cart"}>Cart</Link>
           </span>
         </div>
       </NavbarItem>
       <NavbarItem className="hidden md:flex">
-        {user && user.role === "seller" ? (
-          <Image src={Account} alt="" />
+        {farmer && !farmer?  (
+          <div className="flex gap-[6px] justify-start items-center">
+                
+          <Button as={Link} href="/seller/sellerForm" className="bg-[green] rounded-md  py-[6px] text-white px-3 w-full">
+            Become a seller
+          </Button>
+      </div>
         ) : (
           <div className="flex gap-[6px] justify-start items-center">
-            <Link href="/seller/sellerForm">
+            <Link className="text-black" href="/seller/dashboard">
               <Button className="bg-[green] rounded-md px-3 py-[6px] text-white hidden md:flex">
-                Become a seller
+                farmer dashboard
               </Button>
             </Link>
           </div>

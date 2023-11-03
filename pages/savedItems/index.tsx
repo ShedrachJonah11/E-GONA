@@ -6,7 +6,7 @@ import savedIcon from "../../public/saved.svg";
 export default function SavedItems() {
   const { savedItems, count } = useContext(AppContext);
   return (
-    <div className="min-h-[50vh] m-auto">
+    <div className="min-h-[50vh] m-auto" suppressHydrationWarning={true}>
       <h1 className="px-6 py-2 text-xl font-semibold max-w-[1208px] m-auto">
         SAVED ITEMS
       </h1>
