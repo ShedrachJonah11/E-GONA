@@ -1,3 +1,4 @@
+"use client"
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "@/utils/AppContext";
 import cart from "/public/cart.svg";
@@ -66,7 +67,7 @@ export default function Cart() {
   };
 
   return (
-    <div className="pt-6 ">
+    <div className="pt-6 " suppressHydrationWarning={true}>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
@@ -184,7 +185,7 @@ export default function Cart() {
                 <span className="font-bold text-md">Subtotal</span>
                 <p className="text-stone-600">Delivery not included yet</p>
               </div>
-              <span>₦{total.toFixed(2)}</span>
+              <span>₦{parseFloat(total.toFixed(2)).toLocaleString()}</span>
             </div>
             {cartItems.length > 0 && (
               <Button

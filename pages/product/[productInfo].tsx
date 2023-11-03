@@ -42,7 +42,7 @@ export default function ProductInformation() {
     if (router.isReady) {
       fetchProducts();
     }
-  }, [productInfo]);
+  }, [productInfo,router.isReady]);
 
   const checkStock = () => {
     if (product) {
@@ -67,6 +67,7 @@ export default function ProductInformation() {
               <Image
                 className="sm:w-[200px] h-[200px] w-full rounded"
                 src={product.images[0].url}
+                alt={`${product.name}`}
               ></Image>
               <div>
                 <div className="flex flex-col gap-2 pb-4">

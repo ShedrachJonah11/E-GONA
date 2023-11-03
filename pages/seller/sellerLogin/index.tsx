@@ -86,22 +86,15 @@ export default function SellerLogin() {
           "Content-Type": "application/json",
         },
       };
-      if (form.password && hasReadContract === true) {
+      if (form.password) {
         const signup = await fetch(`${API_URL}/farmers/farmerLogin`, CONFIG);
         const signupRes = await signup.json();
         console.log(signupRes);
         if (signupRes.success) {
           router.push("/seller/dashboard");
+          localStorage.setItem("farmer", JSON.stringify(signupRes.data))
         }
-      } else {
-        // Set error messages when conditions are not met
-
-        if (!hasReadContract) {
-          setContractError("Please accept the e-contract.");
-        } else {
-          setContractError("");
-        }
-      }
+      } 
     } catch (error) {
       console.log(error);
     }
@@ -184,21 +177,7 @@ export default function SellerLogin() {
               {passwordError && (
                 <div className="text-red-500">{passwordError}</div>
               )}
-              <div className="w-full mx-auto max-w-[600px] py-5">
-                <Checkbox
-                  isSelected={hasReadContract}
-                  onValueChange={() => {
-                    setHasReadContract(!hasReadContract);
-                  }}
-                  className="mr-auto"
-                  color="primary"
-                >
-                  I have read and accepted the kasuwa e-contract.{" "}
-                </Checkbox>
-              </div>
-              {contractError && (
-                <div className="text-red-500">{contractError}</div>
-              )}
+             
               <div className="w-full mx-auto max-w-[600px] py-5 flex px-6">
                 <Button
                   type="submit"

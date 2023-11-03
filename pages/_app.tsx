@@ -1,4 +1,5 @@
 //million-ignore
+"use client"
 import * as React from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import type { AppProps } from "next/app";
@@ -10,6 +11,11 @@ import Footer from "@/components/footer";
 import { AppContext } from "@/utils/AppContext";
 import Head from "next/head";
 import Notification from "@/components/notification";
+import { 
+  saveCartItems,
+  loadCartItems,
+  saveSavedItems,
+  loadSavedItems,} from "@/utils/localstorageHook";
 interface cartItem {
   img: string;
   index: number;
@@ -28,13 +34,13 @@ interface product {
 }
 
 function App({ Component, pageProps }: AppProps) {
-  const [cartItems, setCartItems] = useState<any>([]);
+  const [cartItems, setCartItems] = useState(loadCartItems());
+  const [savedItems, setSavedItems] = useState(loadSavedItems());
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [count, setCount] = useState(1);
   const [notification, setNotification] = useState("");
   const [notificationAction, setNotificationAction] = useState("");
   const [notificationVisibles, setNotificationVisible] = useState(false);
-  const [savedItems, setSavedItems] = useState<any>([]);
   const [list, setList] = useState([]);
   const API_URL = "https://kasuwa-b671.onrender.com";
 
@@ -58,23 +64,15 @@ function App({ Component, pageProps }: AppProps) {
       setNotificationVisible(false);
     }, 3000); // Hide the notification after 3 seconds (adjust the duration as needed)
   };
- useEffect(() => {
-    // Save cart items to local storage whenever they change
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    localStorage.setItem("savedItems", JSON.stringify(savedItems));
-  }, [cartItems, savedItems]);
 
   useEffect(() => {
-    // Load cart items from local storage when the app starts
-    const savedCartItems = localStorage.getItem("cartItems");
-    const savedItems = localStorage.getItem("savedItems");
-    if (savedCartItems) {
-      setCartItems(JSON.parse(savedCartItems));
+    if(typeof window !== "undefined" ){
+ saveCartItems(cartItems);
+    saveSavedItems(savedItems);
     }
-    if (savedItems) {
-      setSavedItems(JSON.parse(savedItems));
-    }
-  }, []);
+    // Save cart items to local storage whenever they change
+   
+  }, [cartItems, savedItems]);
 
  
   const addToCart = (product: any, count: number) => {
