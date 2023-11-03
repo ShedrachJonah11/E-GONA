@@ -95,7 +95,7 @@ export default function ProductCard({
         <CardFooter className="text-small justify-between flex flex-col gap-3 w-full p-0 pt-2">
           <div className="px-2 w-full">
             <div className="flex justify-between">
-              <Link scroll={false} href={`/product/${_id}`}>
+              <Link  href={`/product/${_id}`}>
                 <b>{title}</b>
               </Link>
               <div className="flex justify-center gap-1 items-center">
