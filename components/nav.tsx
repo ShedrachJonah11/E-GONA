@@ -48,11 +48,11 @@ export default function Nav() {
     typeof window !== "undefined" ? window.localStorage.getItem("user") : false;
   const user = JSON.parse(userDetails as string);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const farerDetails =
+  const farmerDetails =
     typeof window !== "undefined"
       ? window.localStorage.getItem("farmer")
       : false;
-  const farmer = JSON.parse(farerDetails as string);
+  const farmer = JSON.parse(farmerDetails as string);
   const filteredList = list.filter((item: any) => {
     return item.name.toLowerCase().includes(searchQuery.toLowerCase());
   });
@@ -180,7 +180,48 @@ export default function Nav() {
                 </Link>
               )}
             </DropdownItem>
-
+            <DropdownItem
+              className={`p-0 flex lg:hidden`}
+            >
+              <div>
+                { !farmer ? (
+                  <div className="flex gap-[6px] justify-start items-center">
+                    <Button
+                      as={Link}
+                      href="/seller/sellerForm"
+                      className="bg-[green] rounded-md  py-[6px] text-white px-3 w-full"
+                    >
+                      Become a seller
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex gap-[6px] justify-start items-center">
+                    <Link className="text-black" href="/seller/dashboard">
+                      <Button className="bg-[green] rounded-md px-3 py-[6px] text-white hidden md:flex">
+                        seller dashboard
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </DropdownItem>
+            <DropdownItem
+              className={`p-0 flex `}
+            >
+              <div>
+                { !farmer && (
+                  <div className="flex gap-[6px] justify-start items-center">
+                    <Button
+                      as={Link}
+                      href="/seller/sellerLogin"
+                      className="bg-[green] rounded-md  py-[6px] text-white px-3 w-full"
+                    >
+                      Sign In as a seller
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </DropdownItem>
             <DropdownItem
               variant="flat"
               className={`${!user && "no-space"} py-2 w-full`}
@@ -190,7 +231,9 @@ export default function Nav() {
                 <div className="flex gap-1 justify-start items-center">
                   <Image src={account} alt="logo" width={20} height={20} />
                   <span>
-                    <Link className="text-black" href="/account">My Account</Link>
+                    <Link className="text-black" href="/account">
+                      My Account
+                    </Link>
                   </span>{" "}
                 </div>
               )}
@@ -204,12 +247,18 @@ export default function Nav() {
                 <div className="flex gap-1 justify-start items-center">
                   <Image src={Orders} alt="logo" width={20} height={20} />
                   <span>
-                    <Link className="text-black" href={"#"}>My Orders</Link>
+                    <Link className="text-black" href={"#"}>
+                      My Orders
+                    </Link>
                   </span>
                 </div>
               )}
             </DropdownItem>
-            <DropdownItem variant="flat" className=" py-2 w-full" key="saved items">
+            <DropdownItem
+              variant="flat"
+              className=" py-2 w-full"
+              key="saved items"
+            >
               <div className="flex gap-2 justify-start items-center">
                 {savedItems?.length > 0 ? (
                   <Badge
@@ -224,7 +273,9 @@ export default function Nav() {
                 )}
                 <span>
                   {" "}
-                  <Link className="text-black" href={"/savedItems"}>Saved Items</Link>
+                  <Link className="text-black" href={"/savedItems"}>
+                    Saved Items
+                  </Link>
                 </span>
               </div>
             </DropdownItem>
@@ -246,30 +297,13 @@ export default function Nav() {
                 )}
 
                 <span>
-                  <Link className="text-black" href={"/cart"}>Cart</Link>
+                  <Link className="text-black" href={"/cart"}>
+                    Cart
+                  </Link>
                 </span>
               </div>
-            </DropdownItem>
-            <DropdownItem className={`${!farmer && "nav-no-space"} p-0 flex md:hidden`}>
-            <div>
-            {farmer && !farmer?  (
-          <div className="flex gap-[6px] justify-start items-center">
-                
-          <Button as={Link} href="/seller/sellerForm" className="bg-[green] rounded-md  py-[6px] text-white px-3 w-full">
-            Become a seller
-          </Button>
-      </div>
-        ) : (
-          <div className="flex gap-[6px] justify-start items-center">
-            <Link className="text-black" href="/seller/dashboard">
-              <Button className="bg-[green] rounded-md px-3 py-[6px] text-white hidden md:flex">
-                farmer dashboard
-              </Button>
-            </Link>
-          </div>
-        )}
-            </div>
-            </DropdownItem>
+            </DropdownItem>          
+            
             <DropdownItem
               onClick={() => {
                 localStorage.removeItem("user");
@@ -283,9 +317,7 @@ export default function Nav() {
               {user && (
                 <div className="flex gap-1 justify-start items-center">
                   <Image src={logout} alt="logo" width={21} height={20} />
-                  <span>
-                    <Link className="text-black" href="/account">Logout</Link>
-                  </span>{" "}
+                  <span>Logout</span>{" "}
                 </div>
               )}
             </DropdownItem>
@@ -313,27 +345,34 @@ export default function Nav() {
             />
           )}
           <span>
-            <Link className="text-black" href={"/cart"}>Cart</Link>
+            <Link className="text-black" href={"/cart"}>
+              Cart
+            </Link>
           </span>
         </div>
       </NavbarItem>
       <NavbarItem className="hidden md:flex">
-        {farmer && !farmer?  (
-          <div className="flex gap-[6px] justify-start items-center">
-                
-          <Button as={Link} href="/seller/sellerForm" className="bg-[green] rounded-md  py-[6px] text-white px-3 w-full">
-            Become a seller
-          </Button>
-      </div>
-        ) : (
-          <div className="flex gap-[6px] justify-start items-center">
-            <Link className="text-black" href="/seller/dashboard">
-              <Button className="bg-[green] rounded-md px-3 py-[6px] text-white hidden md:flex">
-                farmer dashboard
-              </Button>
-            </Link>
-          </div>
-        )}
+      <div>
+                {!farmer ? (
+                  <div className="flex gap-[6px] justify-start items-center">
+                    <Button
+                      as={Link}
+                      href="/seller/sellerForm"
+                      className="bg-[green] rounded-md  py-[6px] text-white px-3 w-full"
+                    >
+                      Become a seller
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex gap-[6px] justify-start items-center">
+                    <Link className="text-black" href="/seller/dashboard">
+                      <Button className="bg-[green] rounded-md px-3 py-[6px] text-white hidden md:flex">
+                        seller dashboard
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </div>
       </NavbarItem>
 
       <Modal
