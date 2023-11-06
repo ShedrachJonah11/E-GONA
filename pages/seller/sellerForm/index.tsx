@@ -359,7 +359,7 @@ export default function SellerForm() {
                   }}
                 />
               </div>
-              {/* <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
+              <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
                   Additional phone number
                 </span>
@@ -382,8 +382,8 @@ export default function SellerForm() {
                     });
                   }}
                 />
-              </div> */}
-              {/* <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
+              </div>
+              <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold max-w-[300px] pr-1">
                   Email Address
                 </span>
@@ -404,7 +404,7 @@ export default function SellerForm() {
                     setForm({ type: "email-change", payload: e.target.value });
                   }}
                 />
-              </div> */}
+              </div>
               <div className="flex gap max-w-[600px] flex-col lg:flex-row justify-between lg:items-center w-full">
                 <span className="font-semibold lg:text-right pr-1">
                   Password
