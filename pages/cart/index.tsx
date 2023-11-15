@@ -53,7 +53,7 @@ export default function Cart() {
 
   const config = {
     reference,
-    email: user.email,
+    email: user?.email,
     amount,
     publicKey,
     onSuccess,
