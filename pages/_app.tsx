@@ -4,18 +4,13 @@ import * as React from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import type { AppProps } from "next/app";
 import Nav from "@/components/nav";
-import "../app/globals.css";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Footer from "@/components/footer";
 import { AppContext } from "@/utils/AppContext";
 import Head from "next/head";
 import Notification from "@/components/notification";
-import { 
-  saveCartItems,
-  loadCartItems,
-  saveSavedItems,
-  loadSavedItems,} from "@/utils/localstorageHook";
+import "../app/globals.css";      
 interface cartItem {
   img: string;
   index: number;
@@ -33,9 +28,10 @@ interface product {
   title: string;
 }
 
+
 function App({ Component, pageProps }: AppProps) {
-  const [cartItems, setCartItems] = useState(loadCartItems());
-  const [savedItems, setSavedItems] = useState(loadSavedItems());
+  const [cartItems, setCartItems] = useState<any>([]);
+  const [savedItems, setSavedItems] = useState<any>([]);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [count, setCount] = useState(1);
   const [notification, setNotification] = useState("");
@@ -43,7 +39,27 @@ function App({ Component, pageProps }: AppProps) {
   const [notificationVisibles, setNotificationVisible] = useState(false);
   const [list, setList] = useState([]);
   const API_URL = "https://kasuwa-b671.onrender.com";
+  // Function to save cart items to local storage
+ const saveCartItems = (cartItems:any) => {
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+};
 
+// Function to load cart items from local storage
+ const loadCartItems = () => {
+  const savedCartItems = typeof window !== "undefined" ? window.localStorage.getItem("cartItems"):false;
+  return savedCartItems ? JSON.parse(savedCartItems) : [];
+};
+
+// Function to save saved items to local storage
+ const saveSavedItems = (savedItems:any) => {
+  localStorage.setItem("savedItems", JSON.stringify(savedItems));
+};
+
+// Function to load saved items from local storage
+const loadSavedItems = () => {
+  const savedItems =  typeof window !== "undefined" ? window.localStorage.getItem("savedItems"):false;
+  return savedItems ? JSON.parse(savedItems) : [];
+};
   const FetchProducts = async () => {
     try {
       const allProduct = await fetch(`${API_URL}/products`);
@@ -66,12 +82,19 @@ function App({ Component, pageProps }: AppProps) {
   };
 
   useEffect(() => {
-    if(typeof window !== "undefined" ){
- saveCartItems(cartItems);
+    // Load cart items and saved items from local storage on component mount
+    const loadedCartItems = loadCartItems();
+    const loadedSavedItems = loadSavedItems();
+  
+    // Set the loaded items in state using the functional form of the state-setting functions
+    setCartItems((prevCartItems:any) => [...prevCartItems, ...loadedCartItems]);
+    setSavedItems((prevSavedItems:any) => [...prevSavedItems, ...loadedSavedItems]);
+  }, []);
+
+  useEffect(() => {
+    // Save cart items and saved items to local storage whenever they change
+    saveCartItems(cartItems);
     saveSavedItems(savedItems);
-    }
-    // Save cart items to local storage whenever they change
-   
   }, [cartItems, savedItems]);
 
  
