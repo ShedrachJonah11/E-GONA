@@ -112,9 +112,9 @@ export default function Cart() {
                   <div className="flex justify-between p-2 border-b border-gray-400">
                     <p>we support</p>
                     <div className="flex gap-[4px] justify-center items-center">
-                      <Image src="mastercard.svg"></Image>
-                      <Image src="verve.svg"></Image>
-                      <Image src="interswitch.svg"></Image>
+                      <Image src="mastercard.svg" alt=""></Image>
+                      <Image src="verve.svg" alt=""></Image>
+                      <Image src="interswitch.svg" alt=""></Image>
                     </div>
                   </div>
                   <p className="p-2 ">
