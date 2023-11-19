@@ -138,7 +138,7 @@ const loadSavedItems = () => {
   const decreaseQuantity = (index: number) => {
     // Create a new array with the updated quantity for the specific item
     const updatedCartItems = cartItems.map((item: any, i: any) =>
-      i === index ? { ...item, quantity: item.quantity> 1 && item.quantity - 1 } : item
+      i === index ? { ...item, quantity: item.quantity - 1 } : item
     );
     setCartItems(updatedCartItems);
   };
