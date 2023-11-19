@@ -47,7 +47,7 @@ export default function Cartitem({
     setCount(count + 1);
   };
   const decreament = () => {
-    if (count >= 1) {
+    if (count > 1) {
       setCount(count - 1);
     }
   };
