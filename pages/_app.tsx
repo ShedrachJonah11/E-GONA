@@ -1,5 +1,5 @@
 //million-ignore
-"use client"
+"use client";
 import * as React from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import type { AppProps } from "next/app";
@@ -10,7 +10,7 @@ import Footer from "@/components/footer";
 import { AppContext } from "@/utils/AppContext";
 import Head from "next/head";
 import Notification from "@/components/notification";
-import "../app/globals.css";      
+import "../app/globals.css";
 interface cartItem {
   img: string;
   index: number;
@@ -28,7 +28,6 @@ interface product {
   title: string;
 }
 
-
 function App({ Component, pageProps }: AppProps) {
   const [cartItems, setCartItems] = useState<any>([]);
   const [savedItems, setSavedItems] = useState<any>([]);
@@ -40,26 +39,32 @@ function App({ Component, pageProps }: AppProps) {
   const [list, setList] = useState([]);
   const API_URL = "https://kasuwa-b671.onrender.com";
   // Function to save cart items to local storage
- const saveCartItems = (cartItems:any) => {
-  localStorage.setItem("cartItems", JSON.stringify(cartItems));
-};
+  const saveCartItems = (cartItems: any) => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
 
-// Function to load cart items from local storage
- const loadCartItems = () => {
-  const savedCartItems = typeof window !== "undefined" ? window.localStorage.getItem("cartItems"):false;
-  return savedCartItems ? JSON.parse(savedCartItems) : [];
-};
+  // Function to load cart items from local storage
+  const loadCartItems = () => {
+    const savedCartItems =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("cartItems")
+        : false;
+    return savedCartItems ? JSON.parse(savedCartItems) : [];
+  };
 
-// Function to save saved items to local storage
- const saveSavedItems = (savedItems:any) => {
-  localStorage.setItem("savedItems", JSON.stringify(savedItems));
-};
+  // Function to save saved items to local storage
+  const saveSavedItems = (savedItems: any) => {
+    localStorage.setItem("savedItems", JSON.stringify(savedItems));
+  };
 
-// Function to load saved items from local storage
-const loadSavedItems = () => {
-  const savedItems =  typeof window !== "undefined" ? window.localStorage.getItem("savedItems"):false;
-  return savedItems ? JSON.parse(savedItems) : [];
-};
+  // Function to load saved items from local storage
+  const loadSavedItems = () => {
+    const savedItems =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("savedItems")
+        : false;
+    return savedItems ? JSON.parse(savedItems) : [];
+  };
   const FetchProducts = async () => {
     try {
       const allProduct = await fetch(`${API_URL}/products`);
@@ -85,10 +90,16 @@ const loadSavedItems = () => {
     // Load cart items and saved items from local storage on component mount
     const loadedCartItems = loadCartItems();
     const loadedSavedItems = loadSavedItems();
-  
+
     // Set the loaded items in state using the functional form of the state-setting functions
-    setCartItems((prevCartItems:any) => [...prevCartItems, ...loadedCartItems]);
-    setSavedItems((prevSavedItems:any) => [...prevSavedItems, ...loadedSavedItems]);
+    setCartItems((prevCartItems: any) => [
+      ...prevCartItems,
+      ...loadedCartItems,
+    ]);
+    setSavedItems((prevSavedItems: any) => [
+      ...prevSavedItems,
+      ...loadedSavedItems,
+    ]);
   }, []);
 
   useEffect(() => {
@@ -97,7 +108,6 @@ const loadSavedItems = () => {
     saveSavedItems(savedItems);
   }, [cartItems, savedItems]);
 
- 
   const addToCart = (product: any, count: number) => {
     const itemWithCount = { ...product, quantity: count };
     setCartItems([...cartItems, itemWithCount]);
@@ -138,7 +148,7 @@ const loadSavedItems = () => {
   const decreaseQuantity = (index: number) => {
     // Create a new array with the updated quantity for the specific item
     const updatedCartItems = cartItems.map((item: any, i: any) =>
-      i === index ? { ...item, quantity: item.quantity> 1 && item.quantity - 1 } : item
+      i === index ? { ...item, quantity: item.quantity - 1 } : item
     );
     setCartItems(updatedCartItems);
   };
